@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>2026 Q1・十二週計畫・季總回報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-base: #f0f2ff;
+  --bg-card: #ffffff;
+  --bg-card-alt: #f7f8ff;
+  --accent-blue: #0057ff;
+  --accent-purple: #7c3aed;
+  --accent-orange: #ea4500;
+  --accent-green: #00a651;
+  --accent-yellow: #d97706;
+  --accent-red: #dc2626;
+  --accent-teal: #0891b2;
+  --text-primary: #0f0f1a;
+  --text-secondary: #2d2d4a;
+  --text-muted: #6b7280;
+  --border: rgba(0,0,0,0.08);
+  --border-strong: rgba(0,0,0,0.15);
+  --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.10);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Noto Sans TC', sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── Grid Background ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,87,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,87,255,0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+/* ── Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════
+   SCROLL PROGRESS
+═══════════════════════════════════ */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-orange));
+  z-index: 999;
+  width: 0%;
+  transition: width 0.1s;
+  box-shadow: 0 0 8px rgba(0,87,255,0.5);
+}
+
+/* ═══════════════════════════════════
+   HERO
+═══════════════════════════════════ */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 60px 28px;
+  background: linear-gradient(135deg, #eef2ff 0%, #faf5ff 40%, #fff7ed 100%);
+}
+
+/* Decorative blobs */
+#hero .blob1 {
+  position: absolute;
+  top: -120px; left: -120px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,87,255,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+#hero .blob2 {
+  position: absolute;
+  bottom: -100px; right: -100px;
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+#hero .blob3 {
+  position: absolute;
+  top: 40%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 700px; height: 300px;
+  background: radial-gradient(ellipse, rgba(234,69,0,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Scan line (light version) */
+#hero::after {
+  content: '';
+  position: absolute;
+  top: -5%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-blue) 30%, var(--accent-purple) 70%, transparent 100%);
+  opacity: 0.5;
+  animation: scanline 4s linear infinite;
+}
+@keyframes scanline {
+  0% { top: -5%; }
+  100% { top: 105%; }
+}
+
+.hero-season {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.2s forwards;
+  font-weight: 700;
+}
+
+.hero-title {
+  font-size: clamp(56px, 11vw, 120px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.4s forwards;
+}
+.hero-title .line1 {
+  display: block;
+  color: var(--text-primary);
+  animation: glitch 7s infinite;
+}
+.hero-title .line2 {
+  display: block;
+  font-size: 0.5em;
+  letter-spacing: 0.18em;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 24px;
+}
+
+@keyframes glitch {
+  0%, 91%, 100% { text-shadow: none; transform: none; }
+  92% { text-shadow: -3px 0 var(--accent-purple), 3px 0 var(--accent-blue); transform: skewX(-1.5deg); }
+  93% { text-shadow: 3px 0 var(--accent-orange), -3px 0 var(--accent-purple); transform: skewX(1.5deg); }
+  94% { text-shadow: none; transform: none; }
+  95% { text-shadow: -2px 0 var(--accent-blue); transform: skewX(-0.5deg); }
+  96% { text-shadow: none; transform: none; }
+}
+
+.hero-subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  margin-bottom: 52px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.6s forwards;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 0;
+  background: white;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 52px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.8s forwards;
+}
+.hero-stat {
+  text-align: center;
+  padding: 20px 36px;
+  border-right: 1px solid var(--border);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  line-height: 1;
+  display: block;
+}
+.hero-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: var(--accent-blue);
+  color: white;
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  transition: all 0.25s;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 1s forwards;
+  box-shadow: 0 4px 20px rgba(0,87,255,0.35);
+}
+.hero-cta:hover {
+  background: var(--accent-purple);
+  box-shadow: 0 8px 32px rgba(124,58,237,0.4);
+  transform: translateY(-2px);
+}
+
+.hero-author {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  margin-bottom: 40px;
+  margin-top: -28px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.75s forwards;
+}
+.author-name {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--accent-blue);
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════
+   SECTION COMMON
+═══════════════════════════════════ */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 96px 0;
+}
+section:nth-child(even) { background: white; }
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.4em;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.section-title {
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 52px;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+/* ═══════════════════════════════════
+   GOALS
+═══════════════════════════════════ */
+.goals-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.goals-group-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+  font-weight: 700;
+}
+
+.goal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 4px solid transparent;
+  padding: 20px 22px;
+  margin-bottom: 12px;
+  transition: all 0.25s;
+  box-shadow: var(--shadow-sm);
+}
+.goal-card:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+.goal-card.done        { border-left-color: var(--accent-green); }
+.goal-card.in-progress { border-left-color: var(--accent-blue); }
+.goal-card.adjusted    { border-left-color: var(--accent-yellow); }
+.goal-card.dropped     { border-left-color: var(--accent-orange); }
+.goal-card.pending     { border-left-color: var(--accent-purple); }
+
+.goal-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.goal-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.55;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.goal-title s {
+  color: var(--text-muted);
+  text-decoration-color: var(--accent-orange);
+}
+.goal-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: 6px;
+  padding-left: 12px;
+  border-left: 2px solid var(--border);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  border-radius: 3px;
+  margin-top: 10px;
+}
+.badge.done        { color: white;               background: var(--accent-green);  }
+.badge.in-progress { color: white;               background: var(--accent-blue);   }
+.badge.adjusted    { color: white;               background: var(--accent-yellow); }
+.badge.dropped     { color: white;               background: var(--accent-orange); }
+.badge.pending     { color: white;               background: var(--accent-purple); }
+.badge.new-tag     { color: white;               background: var(--accent-red);    }
+
+/* ═══════════════════════════════════
+   MONTHS
+═══════════════════════════════════ */
+.months-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.month-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s;
+  overflow: hidden;
+}
+.month-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+}
+
+.month-header {
+  padding: 24px 24px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.month-header.jan { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+.month-header.feb { background: linear-gradient(135deg, #faf5ff, #ede9fe); }
+.month-header.mar { background: linear-gradient(135deg, #fff7ed, #ffedd5); }
+
+.month-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.jan .month-tag  { color: var(--accent-blue); }
+.feb .month-tag  { color: var(--accent-purple); }
+.mar .month-tag  { color: var(--accent-orange); }
+
+.month-name {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+.jan .month-name  { color: var(--accent-blue); }
+.feb .month-name  { color: var(--accent-purple); }
+.mar .month-name  { color: var(--accent-orange); }
+
+.month-weeks {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.month-body { padding: 24px; }
+
+.month-exec { margin-bottom: 20px; }
+.month-exec-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.exec-bar {
+  height: 8px;
+  background: var(--bg-base);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+}
+.exec-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  width: 0;
+  transition: width 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.jan .exec-bar-fill  { background: linear-gradient(90deg, var(--accent-blue), #60a5fa); }
+.feb .exec-bar-fill  { background: linear-gradient(90deg, var(--accent-purple), #a78bfa); }
+.mar .exec-bar-fill  { background: linear-gradient(90deg, var(--accent-orange), #fb923c); }
+.exec-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.month-divider { height: 1px; background: var(--border); margin: 18px 0; }
+
+.milestone-list { list-style: none; }
+.milestone-list li {
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--text-secondary);
+}
+.milestone-list li:last-child { border-bottom: none; }
+.milestone-list li::before {
+  content: '▸';
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.jan .milestone-list li::before  { color: var(--accent-blue); }
+.feb .milestone-list li::before  { color: var(--accent-purple); }
+.milestone-sub {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  padding-left: 14px;
+}
+
+.extras-block { margin-top: 18px; }
+.extras-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+}
+.extras-item {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  padding: 3px 0;
+}
+.extras-item strong { color: var(--text-secondary); font-weight: 600; }
+
+/* Pending */
+.month-pending {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  text-align: center;
+  gap: 12px;
+}
+.pending-icon { font-size: 42px; animation: pulse 2.2s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.9); opacity: 0.6; }
+}
+.pending-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--accent-orange);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.pending-sub { font-size: 12px; color: var(--text-muted); }
+
+/* ═══════════════════════════════════
+   MATRIX
+═══════════════════════════════════ */
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: white;
+  box-shadow: var(--shadow-md);
+}
+.matrix-table th, .matrix-table td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.matrix-table thead th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  background: var(--bg-base);
+  font-weight: 700;
+}
+.matrix-table tbody tr:hover { background: #f8f9ff; }
+.matrix-table .goal-col {
+  font-weight: 600;
+  color: var(--text-primary);
+  max-width: 220px;
+}
+
+.matrix-dot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+.dot.done        { background: var(--accent-green);  }
+.dot.in-progress { background: var(--accent-blue);   }
+.dot.adjusted    { background: var(--accent-yellow); }
+.dot.dropped     { background: var(--accent-orange); }
+.dot.pending     { background: var(--accent-purple); }
+.dot.none        { background: var(--border-strong); }
+
+.col-done        { color: var(--accent-green);  }
+.col-in-progress { color: var(--accent-blue);   }
+.col-adjusted    { color: var(--accent-yellow); }
+.col-dropped     { color: var(--accent-orange); }
+.col-pending     { color: var(--accent-purple); }
+
+/* ═══════════════════════════════════
+   RETRO
+═══════════════════════════════════ */
+.retro-terminal {
+  background: var(--text-primary);
+  color: #e0e0ff;
+  padding: 36px 36px 32px;
+  position: relative;
+  font-family: 'JetBrains Mono', monospace;
+  box-shadow: var(--shadow-lg);
+}
+.retro-terminal::before {
+  content: '●  ●  ●';
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 6px;
+}
+.retro-terminal-inner { margin-top: 22px; }
+.terminal-line {
+  font-size: 13px;
+  line-height: 1.9;
+  padding: 1px 0;
+}
+.terminal-line .prompt { color: #60a5fa; margin-right: 8px; }
+.terminal-line .text-green  { color: #4ade80; }
+.terminal-line .text-orange { color: #fb923c; }
+.terminal-line .text-purple { color: #c084fc; }
+.terminal-line .text-muted  { color: rgba(255,255,255,0.4); }
+
+.cursor {
+  display: inline-block;
+  width: 8px; height: 14px;
+  background: #60a5fa;
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink 1.2s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.retro-quote {
+  margin-top: 36px;
+  padding: 28px 32px;
+  border-left: 4px solid var(--accent-purple);
+  background: white;
+  box-shadow: var(--shadow-sm);
+}
+.retro-quote blockquote {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+.retro-quote cite {
+  display: block;
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 52px 0;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: white;
+}
+.footer-logo {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 14px;
+  letter-spacing: -0.03em;
+}
+.footer-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  line-height: 2.2;
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media (max-width: 900px) {
+  .goals-grid   { grid-template-columns: 1fr; }
+  .months-grid  { grid-template-columns: 1fr; }
+  .hero-meta    { flex-wrap: wrap; }
+  .hero-stat    { padding: 16px 24px; }
+}
+@media (max-width: 600px) {
+  section { padding: 56px 0; }
+
+  /* Container */
+  .container { padding: 0 18px; }
+
+  /* Hero */
+  #hero { padding: 52px 18px; }
+  .hero-meta { flex-wrap: wrap; }
+  .hero-stat { flex: 1 1 33.33%; padding: 14px 10px; border-right: none; border-bottom: 1px solid var(--border); }
+  .hero-stat:last-child { border-bottom: none; }
+  .hero-stat-num { font-size: 28px; }
+  .hero-stat-label { font-size: 10px; }
+  .hero-cta { font-size: 12px; padding: 12px 22px; }
+
+  /* Goals */
+  .goals-grid { gap: 28px; }
+  .goal-card { padding: 16px 16px; }
+  .goal-title { font-size: 13px; }
+  .goal-note { font-size: 11px; }
+
+  /* Months */
+  .month-header { padding: 18px 18px 14px; }
+  .month-name { font-size: 28px; }
+  .month-body { padding: 16px 18px; }
+  .milestone-list li { font-size: 12px; padding: 7px 0; }
+
+  /* Matrix */
+  .matrix-table { font-size: 11px; }
+  .matrix-table th, .matrix-table td { padding: 8px 8px; }
+
+  /* Retro */
+  .retro-quote { padding: 20px 20px; margin-top: 24px; }
+  .retro-quote blockquote { font-size: 16px; line-height: 1.7; }
+  .retro-quote cite { font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ═══════════════════════════════════
+   PROJECTOR MODE — 字型放大覆寫
+═══════════════════════════════════ */
+body { line-height: 1.75; }
+
+@media (min-width: 900px) {
+  .container { max-width: 1320px; padding: 0 48px; }
+  section { padding: 80px 0; }
+
+  /* Hero */
+  .hero-author { font-size: 15px; }
+  .hero-season { font-size: 15px; }
+  .hero-subtitle { font-size: 16px; }
+  .hero-stat { padding: 24px 44px; }
+  .hero-stat-num { font-size: 52px; }
+  .hero-stat-label { font-size: 13px; letter-spacing: 0.15em; margin-top: 8px; }
+  .hero-cta { font-size: 15px; padding: 16px 40px; }
+
+  /* Section headings */
+  .section-label { font-size: 17px; letter-spacing: 0.35em; }
+  .section-title { font-size: clamp(48px, 6vw, 72px); margin-bottom: 44px; }
+
+  /* Goals — 單欄垂直 */
+  .goals-grid { grid-template-columns: 1fr; gap: 32px; }
+  .goals-group-label { font-size: 15px; }
+  .goal-card { padding: 28px 32px; margin-bottom: 16px; }
+  .goal-number { font-size: 14px; }
+  .goal-title { font-size: 20px; line-height: 1.5; }
+  .goal-note { font-size: 16px; line-height: 1.7; }
+  .badge { font-size: 13px; padding: 5px 14px; margin-top: 14px; }
+
+  /* Months — 單欄橫向 */
+  .months-grid { grid-template-columns: 1fr; gap: 28px; }
+  .month-card { display: grid; grid-template-columns: 260px 1fr; }
+  .month-header {
+    padding: 40px 32px;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .month-tag { font-size: 13px; }
+  .month-name { font-size: 64px; }
+  .month-weeks { font-size: 15px; }
+  .month-body { padding: 36px 40px; }
+  .month-exec-label { font-size: 15px; }
+  .exec-bar { height: 12px; }
+  .exec-note { font-size: 15px; }
+  /* 內容雙欄 */
+  .month-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; }
+  .month-col-side { border-left: 1px solid var(--border); padding-left: 48px; }
+  /* milestone */
+  .milestone-list li { font-size: 17px; padding: 13px 0; display: block; }
+  .milestone-list li::before { display: inline; margin-right: 6px; margin-top: 0; }
+  .milestone-sub { padding-left: 16px; margin-top: 6px; font-size: 14px; }
+  /* extras */
+  .extras-label { font-size: 19px; }
+  .extras-item { font-size: 16px; line-height: 1.9; }
+
+  /* Matrix */
+  .matrix-table { font-size: 17px; }
+  .matrix-table th, .matrix-table td { padding: 18px 22px; }
+  .matrix-table thead th { font-size: 13px; }
+  .matrix-dot { font-size: 18px; gap: 8px; }
+  .dot { width: 8px; height: 8px; }
+
+  /* Retro */
+  .terminal-line { font-size: 17px; }
+  .retro-quote blockquote { font-size: 24px; line-height: 1.8; }
+  .retro-quote cite { font-size: 14px; }
+
+  /* Footer */
+  .footer-meta { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  <div class="blob3"></div>
+
+  <p class="hero-season mono">2026 Q1 &nbsp;/&nbsp; TWELVE WEEK PLAN</p>
+  <h1 class="hero-title">
+    <span class="line1">十二週計畫</span>
+    <span class="line2">季 &nbsp;·&nbsp; 總 &nbsp;·&nbsp; 回 &nbsp;·&nbsp; 報</span>
+  </h1>
+  <p class="hero-subtitle mono">Jan 2026 &nbsp;→&nbsp; Mar 2026 &nbsp;·&nbsp; Week 01 – 12</p>
+  <p class="hero-author">by &nbsp;<span class="author-name">Gui 桂</span></p>
+
+  <div class="hero-meta">
+    <div class="hero-stat">
+      <span class="hero-stat-num mono" data-count="12">0</span>
+      <span class="hero-stat-label">週數</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num mono" data-count="7">0</span>
+      <span class="hero-stat-label">目標數</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num mono" data-count="3" style="color:var(--accent-green)">0</span>
+      <span class="hero-stat-label">完成目標</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num mono" data-count="2" style="color:var(--accent-blue)">0</span>
+      <span class="hero-stat-label">持續進行中</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num mono" data-count="1" style="color:var(--accent-yellow)">0</span>
+      <span class="hero-stat-label">改變形式</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num mono" data-count="1" style="color:var(--accent-purple)">0</span>
+      <span class="hero-stat-label">未來執行</span>
+    </div>
+  </div>
+
+  <a href="#goals" class="hero-cta mono">↓ &nbsp;展開這一季</a>
+</section>
+
+<!-- ═══ GOALS ═══ -->
+<section id="goals">
+  <div class="container">
+    <p class="section-label reveal">Mission / 目標設定</p>
+    <h2 class="section-title reveal">十二週目標</h2>
+
+    <div class="goals-grid">
+      <!-- PRIMARY -->
+      <div class="reveal">
+        <p class="goals-group-label">主要目標 PRIMARY</p>
+
+        <div class="goal-card adjusted">
+          <p class="goal-number mono">01</p>
+          <p class="goal-title"><s>健康的完成部落格改版</s><br><s style="font-weight:400;font-size:12px">Hexo 產生 API、前端用 Nuxt 做到偽前後端分離</s></p>
+          <p class="goal-note">因爲參與鵝哥的 Side Project，找到更有意義的協作模式，本季改變形式，<strong>但是健康並沒有捨棄唷！</strong></p>
+          <span class="badge adjusted">改變形式</span>
+        </div>
+
+        <div class="goal-card in-progress">
+          <p class="goal-number mono">02</p>
+          <p class="goal-title">規劃與實踐出生第一萬天的日本獨旅計畫</p>
+          <p class="goal-note">護照已處理完成 ✅，信用卡還沒辦 XD，有可能會趁五月底公司日本行結束後獨旅？？</p>
+          <span class="badge in-progress">持續進行中</span>
+        </div>
+
+        <div class="goal-card in-progress">
+          <p class="goal-number mono">03</p>
+          <p class="goal-title">
+            <span class="badge new-tag" style="margin:0 0 8px;display:inline-flex">NEW</span><br>
+            督邵 Z 夜喵履歷 → 舉辦「我盯著你寫履歷 👀」30 天每日任務活動
+          </p>
+          <p class="goal-note">帶更多人完成、最佳化履歷，並嘗試用 Gemini Gem 最佳化出題流程</p>
+          <span class="badge in-progress">持續進行中</span>
+        </div>
+
+        <div class="goal-card done">
+          <p class="goal-number mono">04</p>
+          <p class="goal-title">準備六角前端系列課程講師招募</p>
+          <p class="goal-note">在大家的陪同下準備初試 -> 通過初試 → 持續在大家的陪同下練習 → 二面通過，收到信件錄取通知！</p>
+          <span class="badge done">🎊 收到信件錄取通知</span>
+        </div>
+      </div>
+
+      <!-- SECONDARY -->
+      <div class="reveal" style="transition-delay:0.12s">
+        <p class="goals-group-label">次要目標 SECONDARY</p>
+
+        <div class="goal-card done">
+          <p class="goal-number mono">01</p>
+          <p class="goal-title">後端體驗營 100% 完課</p>
+          <span class="badge done">✅ 完成</span>
+        </div>
+
+        <div class="goal-card done">
+          <p class="goal-number mono">02</p>
+          <p class="goal-title">在台北找到適合健身教練</p>
+          <p class="goal-note"><s>與團課 → 建立起新的生活圈</s>，單純上 1:1 教練課</p>
+          <span class="badge done">✅ 完成</span>
+        </div>
+
+        <div class="goal-card pending">
+          <p class="goal-number mono">03</p>
+          <p class="goal-title"><s>部落格改版過程中，要運用指定書籍所學</s></p>
+          <p class="goal-note">改透過 Side Project 實作、十二週計畫專案來達成所學，形式改變但目標不變</p>
+          <span class="badge pending">未來執行</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MONTHLY REPORTS ═══ -->
+<section id="months">
+  <div class="container">
+    <p class="section-label reveal">Monthly Reports / 月度回報</p>
+    <h2 class="section-title reveal">各月進展</h2>
+
+    <div class="months-grid">
+
+      <!-- JAN -->
+      <div class="month-card jan reveal">
+        <div class="month-header jan">
+          <p class="month-tag mono">January</p>
+          <p class="month-name">一月</p>
+          <p class="month-weeks mono">Week 01 – 04</p>
+        </div>
+        <div class="month-body">
+          <div class="month-exec">
+            <p class="month-exec-label">整體執行度</p>
+            <div class="exec-bar"><div class="exec-bar-fill" data-width="78"></div></div>
+            <p class="exec-note">各個目標依序啟動</p>
+          </div>
+          <div class="month-divider"></div>
+          <div class="month-cols">
+            <div class="month-col-main">
+              <ul class="milestone-list">
+                <li>
+                  六角前端講師招募：<strong>準備初試</strong>
+                  <div class="milestone-sub">完成初試準備 ✅，等待結果通知</div>
+                </li>
+                <li>部落格改版：<strong>完成 Hexo API 產生 ✅</strong></li>
+                <li>後端體驗營 <strong>進行中</strong></li>
+                <li>台北健身教練 <strong>成功找到 ✅</strong></li>
+              </ul>
+            </div>
+            <div class="month-col-side">
+              <div class="extras-block">
+                <p class="extras-label">十二週以外</p>
+                <p class="extras-item"><strong>生活：</strong>完成出生一萬天的 YouBike 環騎台北挑戰 🚴</p>
+                <p class="extras-item"><strong>生活：</strong>參加兩次破圈活動，突破舒適圈認識各領域朋友，發現人類圖很適合探索自我</p>
+                <p class="extras-item"><strong>工作：</strong>參與公司十週年官網前端主視覺開發、Socket 展品呈現</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEB -->
+      <div class="month-card feb reveal" style="transition-delay:0.12s">
+        <div class="month-header feb">
+          <p class="month-tag mono">February</p>
+          <p class="month-name">二月</p>
+          <p class="month-weeks mono">Week 05 – 08</p>
+        </div>
+        <div class="month-body">
+          <div class="month-exec">
+            <p class="month-exec-label">整體執行度</p>
+            <div class="exec-bar"><div class="exec-bar-fill" data-width="38"></div></div>
+            <p class="exec-note">「別提了吧，傷感情」</p>
+          </div>
+          <div class="month-divider"></div>
+          <div class="month-cols">
+            <div class="month-col-main">
+              <ul class="milestone-list">
+                <li>
+                  開始舉辦「我盯著你寫履歷 👀」
+                  <div class="milestone-sub">30天出了 <strong>9 天</strong>題目，嘗試用 Gemini Gem 最佳化出題</div>
+                </li>
+                <li>後端體驗營完課率 <strong>100% ✅</strong></li>
+                <li>
+                  <strong>重大調整：捨棄部落格改版</strong>
+                  <div class="milestone-sub">加入鵝哥 Side Project，找到更有意義的專案模式</div>
+                </li>
+                <li>
+                  六角講師招募：<strong>收到初試通過通知，進入二面！完成第一次試講練習</strong>
+                  <div class="milestone-sub">重新啟動，暫定 50%，待三月複試</div>
+                </li>
+              </ul>
+            </div>
+            <div class="month-col-side">
+              <div class="extras-block">
+                <p class="extras-label">十二週以外</p>
+                <p class="extras-item"><strong>工作：</strong>WebCRACK 重構 TypeScript 正式上線 🎉</p>
+                <p class="extras-item"><strong>工作：</strong>第一次嘗試 AWS 快照</p>
+                <p class="extras-item"><strong>工作：</strong>開始使用 Cursor Skill 與工作區</p>
+                <p class="extras-item"><strong>生活：</strong>《深度工作力》217 / 299 頁</p>
+                <p class="extras-item"><strong>生活：</strong>參與 I 人共學揪團區</p>
+                <p class="extras-item"><strong>生活：</strong>尾牙連續兩次第一輪二獎，第二輪貢估 QAQ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MAR -->
+      <div class="month-card mar reveal" style="transition-delay:0.24s">
+        <div class="month-header mar">
+          <p class="month-tag mono">March</p>
+          <p class="month-name">三月</p>
+          <p class="month-weeks mono">Week 09 – 12</p>
+        </div>
+        <div class="month-body">
+          <div class="month-exec">
+            <p class="month-exec-label">整體執行度</p>
+            <div class="exec-bar"><div class="exec-bar-fill" data-width="42"></div></div>
+            <p class="exec-note">「別提了吧，傷感情」</p>
+          </div>
+          <div class="month-divider"></div>
+          <div class="month-cols">
+            <div class="month-col-main">
+              <ul class="milestone-list">
+                <li>
+                  「我盯著你寫履歷 👀」持續進行
+                  <div class="milestone-sub">題目已出到<strong>第 24 天</strong> 🎉</div>
+                </li>
+                <li>
+                  <strong>🎊 六角講師二面通過，收到信件錄取通知！</strong>
+                  <div class="milestone-sub">還沒簽約，但已成功拿到錄取信件</div>
+                </li>
+                <li>
+                  護照處理完成並拿到 ✅
+                  <div class="milestone-sub">考慮 5 月底公司日本行後自己獨旅？<br>但日本信用卡還沒辦 ... 啊啊啊！！</div>
+                </li>
+              </ul>
+            </div>
+            <div class="month-col-side">
+              <div class="extras-block">
+                <p class="extras-label">十二週以外</p>
+                <p class="extras-item"><strong>工作：</strong>從 Cursor 改用 Claude Code CLI，成為真正意義上的全端仔 🚀</p>
+                <p class="extras-item"><strong>課程：</strong>Claude Code 深度應用 83%</p>
+                <p class="extras-item"><strong>課程：</strong>現代系統設計實戰營 16%</p>
+                <p class="extras-item"><strong>生活：</strong>做了眼睛雷射諮詢、染髮</p>
+                <p class="extras-item"><strong>生活：</strong>參與 Cake Build with AI 活動</p>
+                <p class="extras-item"><strong>生活：</strong>開始找下一間租屋</p>
+                <p class="extras-item"><strong>生活：</strong>頭痛吃藥約 4 次 ...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MATRIX ═══ -->
+<section id="matrix">
+  <div class="container">
+    <p class="section-label reveal">Status Matrix / 狀態矩陣</p>
+    <h2 class="section-title reveal">全季目標一覽</h2>
+
+    <div class="reveal">
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>目標</th>
+            <th>一月</th>
+            <th>二月</th>
+            <th>三月</th>
+            <th>最終</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="goal-col">部落格改版（Hexo + Nuxt）</td>
+            <td><span class="matrix-dot"><span class="dot adjusted"></span><span class="col-adjusted">完成 API</span></span></td>
+            <td><span class="matrix-dot"><span class="dot dropped"></span><span class="col-dropped">捨棄</span></span></td>
+            <td><span class="matrix-dot"><span class="dot none"></span><span style="color:var(--text-muted)">—</span></span></td>
+            <td><span class="matrix-dot"><span class="dot dropped"></span><span class="col-dropped">捨棄</span></span></td>
+          </tr>
+          <tr>
+            <td class="goal-col">日本獨旅計畫</td>
+            <td><span class="matrix-dot"><span class="dot adjusted"></span><span class="col-adjusted">調整中</span></span></td>
+            <td><span class="matrix-dot"><span class="dot dropped"></span><span class="col-dropped">捨棄</span></span></td>
+            <td><span class="matrix-dot"><span class="dot adjusted"></span><span class="col-adjusted">護照完成 ✅</span></span></td>
+            <td><span class="matrix-dot"><span class="dot adjusted"></span><span class="col-adjusted">部分完成（信用卡待辦）</span></span></td>
+          </tr>
+          <tr>
+            <td class="goal-col">「我盯著你寫履歷 👀」30天活動</td>
+            <td><span class="matrix-dot"><span class="dot none"></span><span style="color:var(--text-muted)">—</span></span></td>
+            <td><span class="matrix-dot"><span class="dot in-progress"></span><span class="col-in-progress">9 天</span></span></td>
+            <td><span class="matrix-dot"><span class="dot in-progress"></span><span class="col-in-progress">24 天</span></span></td>
+            <td><span class="matrix-dot"><span class="dot in-progress"></span><span class="col-in-progress">24 / (30 + N) 進行中</span></span></td>
+          </tr>
+          <tr>
+            <td class="goal-col">六角前端講師招募</td>
+            <td><span class="matrix-dot"><span class="dot in-progress"></span><span class="col-in-progress">準備初試</span></span></td>
+            <td><span class="matrix-dot"><span class="dot in-progress"></span><span class="col-in-progress">第一次試講</span></span></td>
+            <td><span class="matrix-dot"><span class="dot done"></span><span class="col-done">🎊 收到信件錄取通知</span></span></td>
+            <td><span class="matrix-dot"><span class="dot done"></span><span class="col-done">✅ 錄取（待簽約）</span></span></td>
+          </tr>
+          <tr>
+            <td class="goal-col">後端體驗營 100% 完課</td>
+            <td><span class="matrix-dot"><span class="dot in-progress"></span><span class="col-in-progress">進行中</span></span></td>
+            <td><span class="matrix-dot"><span class="dot done"></span><span class="col-done">100%</span></span></td>
+            <td><span class="matrix-dot"><span class="dot none"></span><span style="color:var(--text-muted)">—</span></span></td>
+            <td><span class="matrix-dot"><span class="dot done"></span><span class="col-done">✅ 完成</span></span></td>
+          </tr>
+          <tr>
+            <td class="goal-col">台北找健身教練</td>
+            <td><span class="matrix-dot"><span class="dot done"></span><span class="col-done">找到</span></span></td>
+            <td><span class="matrix-dot"><span class="dot none"></span><span style="color:var(--text-muted)">—</span></span></td>
+            <td><span class="matrix-dot"><span class="dot none"></span><span style="color:var(--text-muted)">—</span></span></td>
+            <td><span class="matrix-dot"><span class="dot done"></span><span class="col-done">✅ 完成</span></span></td>
+          </tr>
+          <tr>
+            <td class="goal-col">書籍學習融入部落格改版</td>
+            <td><span class="matrix-dot"><span class="dot adjusted"></span><span class="col-adjusted">暫緩</span></span></td>
+            <td><span class="matrix-dot"><span class="dot dropped"></span><span class="col-dropped">捨棄</span></span></td>
+            <td><span class="matrix-dot"><span class="dot adjusted"></span><span class="col-adjusted">改變形式</span></span></td>
+            <td><span class="matrix-dot"><span class="dot adjusted"></span><span class="col-adjusted">改變形式</span></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RETRO ═══ -->
+<section id="retro">
+  <div class="container">
+    <p class="section-label reveal">Retrospective / 這一季</p>
+    <h2 class="section-title reveal">季度反思</h2>
+
+    <div class="retro-terminal reveal">
+      <div class="retro-terminal-inner">
+        <div class="terminal-line"><span class="prompt">$</span> <span class="text-green">review --season 2026-Q1</span></div>
+        <div class="terminal-line" style="height:10px"></div>
+        <div class="terminal-line"><span class="prompt">›</span> 完成：<span class="text-green">後端體驗營 100%、健身教練、護照拿到、六角講師信件錄取通知 🎊</span></div>
+        <div class="terminal-line"><span class="prompt">›</span> 捨棄：<span class="text-orange">部落格改版</span>（但找到更有意義 Side Project 模式）</div>
+        <div class="terminal-line"><span class="prompt">›</span> 進行中：<span class="text-green">「我盯著你寫履歷 👀」已出到第 24 天</span></div>
+        <div class="terminal-line"><span class="prompt">›</span> 工具革命：<span class="text-purple">從 Cursor → Claude Code CLI，開發流程全面升級</span></div>
+        <div class="terminal-line"><span class="prompt">›</span> 執行力：<span class="text-orange">別提了吧，傷感情，但總結果或許還可以？</span></div>
+        <div class="terminal-line" style="height:10px"></div>
+        <div class="terminal-line"><span class="prompt">$</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+
+    <div class="retro-quote reveal" style="transition-delay:0.15s">
+      <blockquote>
+        找到比起只有自己得利更有意義的專案模式——<br>
+        這或許是這一季最重要的收穫，不在計畫之內，卻改變了計畫本身。
+      </blockquote>
+      <cite>— 2026 Q1 最大收穫</cite>
+    </div>
+
+    <div class="retro-quote reveal" style="transition-delay:0.3s">
+      <blockquote>
+        抱持著「就算失敗也不後悔」的心情去做自己認為不可能的事——<br>
+        收到講師錄取通知，是這一季最大的驚喜。
+      </blockquote>
+      <cite>— 2026 Q1 最大驚喜</cite>
+    </div>
+
+    <div class="retro-quote reveal" style="transition-delay:0.45s">
+      <blockquote>
+        每到月底回首，上個月的自己大概很難想像——<br>
+        這個月的我，已經走到了這裡。
+      </blockquote>
+      <cite>— 2026 Q1 持續前進</cite>
+    </div>
+
+    <div class="retro-quote reveal" style="transition-delay:0.6s">
+      <blockquote>
+        或許我們很難想像十年後的自己是什麼樣子——<br>
+        但此刻所做的選擇，已經在影響十天後的我了。
+      </blockquote>
+      <cite>— 2026 Q1 當下的選擇</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <p class="footer-logo">2026 Q1</p>
+    <div class="footer-meta mono">
+      <p>十二週計畫 &nbsp;·&nbsp; 季總回報</p>
+      <p>January – March 2026 &nbsp;·&nbsp; Week 01 → 12</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Scroll Progress ──
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  progressBar.style.width = pct + '%';
+});
+
+// ── Counter Roll ──
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count);
+  const duration = 1400;
+  const start = performance.now();
+  const update = (now) => {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target;
+  };
+  requestAnimationFrame(update);
+}
+
+// ── Intersection Observer ──
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    revealObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Counter hero
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.querySelectorAll('[data-count]').forEach(el => animateCounter(el));
+    counterObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.5 });
+counterObserver.observe(document.querySelector('#hero'));
+
+// Progress bars
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.querySelectorAll('.exec-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.width + '%';
+    });
+    barObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.month-card').forEach(card => barObserver.observe(card));
+</script>
+</body>
+</html>
